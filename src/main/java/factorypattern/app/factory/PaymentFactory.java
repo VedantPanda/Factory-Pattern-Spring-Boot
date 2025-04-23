@@ -16,6 +16,12 @@ public class PaymentFactory {
     @Autowired
     public PaymentFactory(List<PaymentProcessor> paymentProcessors) {
         paymentMethodMap = new EnumMap<>(PaymentMethod.class);
-        paymentProcessors.forEach(paymentMethodMap.put(paymentProcessors.));
+        paymentProcessors.forEach(paymentProcessor -> paymentMethodMap.put(paymentProcessor.getPaymentMethod(),
+                paymentProcessor));
     }
+
+    public PaymentProcessor getPaymentStrategy(PaymentMethod paymentMethod) {
+        return paymentMethodMap.get(paymentMethod);
+    }
+
 }
